@@ -1,8 +1,7 @@
 import { primary } from "@/lib/colors";
-import styled from "styled-components";
-import css from "styled-jsx/css";
+import styled, { css } from "styled-components";
 
-const StyledButton = styled.button`
+export const ButtonStyle = css`
   border: 0;
   padding: 5px 15px;
   border-radius: 5px;
@@ -77,6 +76,10 @@ const StyledButton = styled.button`
         height: 20px;
       }
     `}
+`;
+
+const StyledButton = styled.button`
+  ${ButtonStyle}
 `;
 
 export default function Button({ children, ...rest }) {

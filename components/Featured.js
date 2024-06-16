@@ -56,7 +56,7 @@ export default function Featured({ featureProduct }) {
               <Title>{featureProduct.title}</Title>
               <Desc>{featureProduct.description}</Desc>
               <ButtonsWrapper>
-                <ButtonLink outline={1} white={1} href="/products">
+                <ButtonLink outline={1} white={true} href="/products">
                   Read More
                 </ButtonLink>
                 <Button white onClick={addFeatureToCart}>
