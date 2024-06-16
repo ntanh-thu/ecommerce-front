@@ -1,7 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
 import css from "styled-jsx/css";
-import { primary } from "@/lib/colors";
 
 const StyledLink = styled(Link)`
   border: 0;
@@ -11,7 +10,6 @@ const StyledLink = styled(Link)`
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  font-weight: bold;
   svg {
     height: 16px;
     margin-right: 5px;
@@ -33,21 +31,12 @@ const StyledLink = styled(Link)`
     `}
   ${(props) =>
     props.primary &&
-    !props.outline &&
     css`
-      background-color: ${primary};
-      border: 1px solid ${primary};
+      background-color: #5542f6;
+      border: 1px solid #5542f6;
       color: #fff;
     `}
-    ${(props) =>
-    props.primary &&
-    props.outline &&
-    css`
-      background-color: transparent;
-      border: 1px solid ${primary};
-      color: ${primary};
-    `}
-    ${(props) =>
+  ${(props) =>
     props.size === "l" &&
     css`
       font-size: 1.2rem;
@@ -58,6 +47,10 @@ const StyledLink = styled(Link)`
     `}
 `;
 
-export function ButtonLink({ children, ...rest }) {
-  return <StyledLink {...rest}>{children}</StyledLink>;
+export function ButtonLink({ children, className, ...rest }) {
+  return (
+    <StyledLink className={className} {...rest}>
+      {children}
+    </StyledLink>
+  );
 }
