@@ -5,6 +5,7 @@ import Header from "@/components/Header";
 import Input from "@/components/Input";
 import Table from "@/components/Table";
 import axios from "axios";
+import { useRouter } from "next/router";
 import { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -49,7 +50,8 @@ const CityHolder = styled.div`
   gap: 5px;
 `;
 export default function CartPage() {
-  const { cartProducts, addProduct, removeProduct } = useContext(CartContext);
+  const { cartProducts, addProduct, removeProduct, clearCart } = useContext(CartContext);
+  const route = useRouter();
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -69,6 +71,12 @@ export default function CartPage() {
       setProducts([]);
     }
   }, [cartProducts]);
+
+  useEffect(() => {
+    if (route.asPath.includes("success")) {
+      clearCart();
+    }
+  }, []);
 
   function moreOfThisProduct(id) {
     addProduct(id);
@@ -97,8 +105,7 @@ export default function CartPage() {
       window.location = response.data.url;
     }
   }
-
-  if (window.location.href.includes("success")) {
+  if (route.asPath.includes("success")) {
     return (
       <>
         <Header />
