@@ -13,7 +13,6 @@ export default async function handler(req, res) {
   const uniqueIds = [...new Set(productIds)];
   const productInfos = await Product.find({ _id: uniqueIds });
   let line_items = [];
-  console.log(uniqueIds);
 
   for (const productId of uniqueIds) {
     const productinfo = productInfos.find((p) => p._id.toString() === productId);
@@ -48,6 +47,7 @@ export default async function handler(req, res) {
     cancel_url: process.env.PUBLIC_URL + "/cart?canceled=1",
     metadata: {
       orderId: orderDoc._id.toString(),
+      test: "ok",
     },
   });
   res.json({

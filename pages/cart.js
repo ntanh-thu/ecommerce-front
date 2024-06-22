@@ -59,6 +59,7 @@ export default function CartPage() {
   const [postalCode, setPostalCode] = useState("");
   const [streetAddress, setStreetAddress] = useState("");
   const [country, setCountry] = useState("");
+  const [paymentSuccess, setPaymentSuccess] = useState(false);
   async function getAllProductInCart(ids) {
     await axios.post("/api/cart", { ids: ids }).then((response) => {
       setProducts(response.data);
@@ -75,6 +76,7 @@ export default function CartPage() {
   useEffect(() => {
     if (route.asPath.includes("success")) {
       clearCart();
+      setPaymentSuccess(true);
     }
   }, []);
 
@@ -102,10 +104,10 @@ export default function CartPage() {
       cartProducts,
     });
     if (response.data.url) {
-      window.location = response.data.url;
+      route.push(response.data.url);
     }
   }
-  if (route.asPath.includes("success")) {
+  if (paymentSuccess) {
     return (
       <>
         <Header />
