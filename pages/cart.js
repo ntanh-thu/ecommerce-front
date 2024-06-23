@@ -11,7 +11,10 @@ import styled from "styled-components";
 
 const ColumnWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.2fr 0.8fr;
+  grid-template-columns: 1fr;
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
   gap: 40px;
   margin-top: 40px;
 `;
@@ -27,22 +30,36 @@ const ProductInfoCell = styled.td`
 `;
 
 const ProductImageBox = styled.div`
-  width: 100px;
+  width: 70px;
   height: 100px;
-  padding: 10px;
+  padding: 2px;
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   img {
-    max-width: 80px;
-    max-height: 80px;
+    max-width: 60px;
+    max-height: 60px;
+  }
+  @media screen and (min-width: 768px) {
+    padding: 10px;
+    width: 100px;
+    height: 100px;
+    img {
+      max-width: 80px;
+      max-height: 80px;
+    }
   }
 `;
 
 const QuantityLabel = styled.span`
-  padding: 0 3px;
+  padding: 0 15px;
+  display: flex;
+  @media screen and (min-width: 768px) {
+    display: inline-block;
+    padding: 0 10px;
+  }
 `;
 
 const CityHolder = styled.div`
@@ -50,7 +67,8 @@ const CityHolder = styled.div`
   gap: 5px;
 `;
 export default function CartPage() {
-  const { cartProducts, addProduct, removeProduct, clearCart } = useContext(CartContext);
+  const { cartProducts, addProduct, removeProduct, clearCart } =
+    useContext(CartContext);
   const route = useRouter();
   const [products, setProducts] = useState([]);
   const [name, setName] = useState("");
@@ -141,7 +159,7 @@ export default function CartPage() {
                 </thead>
                 <tbody>
                   {products.map((product) => (
-                    <tr>
+                    <tr key={product._id}>
                       <ProductInfoCell>
                         <ProductImageBox>
                           <img src={"http://" + product.images[0]} alt="" />
@@ -156,7 +174,12 @@ export default function CartPage() {
                         >
                           -
                         </Button>
-                        <QuantityLabel>{cartProducts.filter((id) => id === product._id).length}</QuantityLabel>
+                        <QuantityLabel>
+                          {
+                            cartProducts.filter((id) => id === product._id)
+                              .length
+                          }
+                        </QuantityLabel>
                         <Button
                           onClick={() => {
                             moreOfThisProduct(product._id);
@@ -165,7 +188,11 @@ export default function CartPage() {
                           +
                         </Button>
                       </td>
-                      <td>${cartProducts.filter((id) => id === product._id).length * parseInt(product.price)}</td>
+                      <td>
+                        $
+                        {cartProducts.filter((id) => id === product._id)
+                          .length * parseInt(product.price)}
+                      </td>
                     </tr>
                   ))}
                   <tr>

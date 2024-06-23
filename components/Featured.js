@@ -16,6 +16,9 @@ const Title = styled.h1`
   margin: 0;
   font-weight: normal;
   font-size: 3rem;
+  @media screen and (min-width: 768px) {
+    font-size: 3rem;
+  }
 `;
 
 const Desc = styled.p`
@@ -25,10 +28,25 @@ const Desc = styled.p`
 
 const ColumnWrapper = styled.div`
   display: grid;
-  grid-template-columns: 1.1fr 0.9fr;
+  grid-template-columns: 1fr;
   gap: 40px;
   img {
     max-width: 100%;
+    max-height: 200px;
+    display: block;
+    margin: 0 auto;
+  }
+  div:nth-child(1) {
+    order: 2;
+  }
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 1.1fr 0.9fr;
+    div:nth-child(1) {
+      order: 0;
+    }
+    img {
+      max-width: 100%;
+    }
   }
 `;
 
@@ -56,7 +74,11 @@ export default function Featured({ featureProduct }) {
               <Title>{featureProduct.title}</Title>
               <Desc>{featureProduct.description}</Desc>
               <ButtonsWrapper>
-                <ButtonLink outline={1} white={true} href="/products">
+                <ButtonLink
+                  outline={1}
+                  white={true}
+                  href={"/product/" + featureProduct._id}
+                >
                   Read More
                 </ButtonLink>
                 <Button white onClick={addFeatureToCart}>
@@ -67,7 +89,10 @@ export default function Featured({ featureProduct }) {
             </div>
           </Column>
           <Column>
-            <img src="http://127.0.0.1:9000/next-ecommerce/1679151719649.png" alt="" />
+            <img
+              src="http://127.0.0.1:9000/next-ecommerce/1679151719649.png"
+              alt=""
+            />
           </Column>
         </ColumnWrapper>
       </Center>
