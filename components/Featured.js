@@ -67,7 +67,7 @@ export default function Featured({ featureProduct }) {
             </div>
           </Column>
           <Column>
-            <img src="http://127.0.0.1:9000/next-ecommerce/1679151719649.png" alt="" />
+            <img src={featureProduct.images[0]} alt="" />
           </Column>
         </ColumnWrapper>
       </Center>
