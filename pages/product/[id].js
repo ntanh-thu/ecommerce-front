@@ -13,6 +13,9 @@ import styled from "styled-components";
 const ColWapper = styled.div`
   display: grid;
   grid-template-columns: 0.8fr 1.2fr;
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 0.8fr 1.2fr;
+  }
   gap: 40px;
   margin-top: 40px;
 `;
